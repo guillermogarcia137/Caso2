@@ -17,7 +17,7 @@ export async function fingerprint(data: Omit<Certificate, 'hash'>): Promise<stri
 export async function issueCertificate(course: string, grade: number): Promise<Certificate> {
   const data = {
     id: `STA-${crypto.randomUUID()}`,
-    name: 'Guillermo García',
+    name: 'Alumno',
     course,
     date: new Date().toISOString().slice(0, 10),
     grade,

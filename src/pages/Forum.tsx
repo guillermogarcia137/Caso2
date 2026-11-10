@@ -29,7 +29,7 @@ export default function Forum() {
       course: newCourse,
       title: title.trim(),
       body: body.trim(),
-      author: 'Guillermo García',
+      author: 'Alumno',
       solved: false,
       replies: [],
     };
@@ -139,7 +139,7 @@ export default function Forum() {
                     .map((s) => s[0])
                     .join('')}
                 </span>
-                {(session?.role !== 'Alumno' || active.author === 'Guillermo García') && (
+                {(session?.role !== 'Alumno' || active.author === 'Alumno') && (
                   <button
                     className="button secondary small"
                     onClick={() =>
@@ -172,7 +172,7 @@ export default function Forum() {
                             ...t,
                             replies: [
                               ...t.replies,
-                              `${session?.role === 'Tutor' ? 'Lucía (tutora)' : 'Guillermo'} · ${reply.trim()}`,
+                              `${session?.role === 'Tutor' ? 'Lucía (tutora)' : 'Alumno'} · ${reply.trim()}`,
                             ],
                           }
                         : t,

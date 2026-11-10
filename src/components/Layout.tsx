@@ -123,9 +123,9 @@ export function Sidebar({ close }: { close: () => void }) {
           Validar certificado
         </Link>
         <div className="profile">
-          <span className="avatar">GG</span>
+          <span className="avatar">AL</span>
           <div>
-            <b>Guillermo García</b>
+            <b>Alumno</b>
             <small>{session?.role} · Cuenta de demo</small>
           </div>
           <button className="icon-button" aria-label="Cerrar sesión" onClick={logout}>

@@ -27,7 +27,7 @@ export default function Dashboard() {
         <div>
           <p className="eyebrow">TU FUTURO EMPIEZA AQUÍ</p>
           <h1>
-            Hola, Guillermo <span className="wave">✦</span>
+            Hola, Alumno <span className="wave">✦</span>
           </h1>
           <p>Un paso más cerca de tu próxima gran oportunidad.</p>
         </div>

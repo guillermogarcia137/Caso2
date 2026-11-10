@@ -90,7 +90,7 @@ export default function Chat() {
           <header className="chat-header">
             <span className="avatar tutor-avatar">LM</span>
             <div>
-              <h3>{session?.role === 'Tutor' ? 'Guillermo García · Alumno' : 'Lucía Martín'}</h3>
+              <h3>{session?.role === 'Tutor' ? 'Alumno · Cuenta de demo' : 'Lucía Martín'}</h3>
               <p>Tutoría de Java y programación</p>
             </div>
             <ShieldCheck size={20} />

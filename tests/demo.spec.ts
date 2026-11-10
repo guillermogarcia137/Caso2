@@ -3,11 +3,14 @@ import { test, expect } from '@playwright/test';
 async function openSession(page: import('@playwright/test').Page, role = 'Alumno') {
   await page.goto('./');
   await page.evaluate((role) => {
-    localStorage.setItem('skilltech:session', JSON.stringify({ role, email: 'demo@example.com' }));
+    localStorage.setItem(
+      'skilltech:class-demo:session',
+      JSON.stringify({ role, email: 'demo@example.com' }),
+    );
   }, role);
   await page.goto('./#/');
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Hola, Guillermo' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Hola, Alumno' })).toBeVisible();
 }
 test('Acceso de dos pasos y navegación del alumno', async ({ page }) => {
   await page.goto('./');
@@ -15,7 +18,7 @@ test('Acceso de dos pasos y navegación del alumno', async ({ page }) => {
   await page.getByRole('button', { name: 'Iniciar sesión' }).click();
   await page.getByLabel('Código de verificación').fill('123456');
   await page.getByRole('button', { name: 'Verificar y entrar' }).click();
-  await expect(page.getByRole('heading', { name: 'Hola, Guillermo' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Hola, Alumno' })).toBeVisible();
   await page.screenshot({ path: 'test-results/screenshots/dashboard.png', fullPage: true });
   await expect(page.locator('a[href="https://github.com/guillermogarcia137/Caso2"]')).toBeVisible();
   await page.getByRole('button', { name: 'Cambiar tema' }).click();
@@ -103,7 +106,7 @@ test('Examen: autoguardado, corrección, certificado, PDF y modificación', asyn
   await page.getByRole('button', { name: 'Descargar PDF' }).click();
   expect((await download).suggestedFilename()).toMatch(/\.pdf$/);
   const cert = await page.evaluate(
-    () => JSON.parse(localStorage.getItem('skilltech:certificates')!)[0],
+    () => JSON.parse(localStorage.getItem('skilltech:class-demo:certificates')!)[0],
   );
   await page.goto('./#/validar');
   await page.getByLabel('ID o contenido del QR').fill(cert.id);
@@ -122,7 +125,7 @@ test('Foro, chat, rutas y diseño móvil', async ({ page }) => {
   await page.goto('./#/foro');
   await page.getByLabel('Tu respuesta').fill('Gracias por la explicación');
   await page.getByRole('button', { name: 'Responder', exact: true }).click();
-  await expect(page.getByText('Guillermo · Gracias por la explicación')).toBeVisible();
+  await expect(page.getByText('Alumno · Gracias por la explicación')).toBeVisible();
   await page.goto('./#/chat');
   await page.getByLabel('Escribe tu mensaje').fill('¿Me ayudas con Java?');
   await page.getByRole('button', { name: 'Enviar mensaje' }).click();

@@ -9,7 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [register, setRegister] = useState(false);
   const [step, setStep] = useState(1);
-  const [email, setEmail] = useState('guillermo@skilltech.demo');
+  const [email, setEmail] = useState('alumno@skilltech.demo');
   const [role, setRole] = useState<Role>('Alumno');
   const [code, setCode] = useState('');
   /** Avanza la verificación o abre una sesión ficticia sin guardar credenciales. */

@@ -26,7 +26,7 @@ export const THREADS: Thread[] = [
     author: 'Pablo Sánchez',
     body: 'He terminado mi calculadora en Java. ¿Qué estáis construyendo?',
     solved: false,
-    replies: ['Guillermo · ¡Yo estoy haciendo un gestor de tareas!'],
+    replies: ['Alumno · ¡Yo estoy haciendo un gestor de tareas!'],
   },
   {
     id: '3',
@@ -42,7 +42,7 @@ export const MESSAGES = [
   {
     id: '1',
     from: 'tutor',
-    text: '¡Hola, Guillermo! 👋 Soy Lucía, tu tutora. ¿Cómo llevas el curso?',
+    text: '¡Hola, Alumno! 👋 Soy Lucía, tu tutora. ¿Cómo llevas el curso?',
     time: '10:30',
   },
   {
