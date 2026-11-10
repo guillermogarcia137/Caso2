@@ -3,7 +3,7 @@ import { Send, Code2, ShieldCheck, MessageCircle } from 'lucide-react';
 import { ChatBubble, type Message } from '../components/ChatBubble';
 import { MESSAGES } from '../data/forum';
 import { readStorage, writeStorage } from '../utils/storage';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 /** Chat local con fragmentos de código y respuesta automática explícitamente simulada. */
 export default function Chat() {
   const { session } = useApp();

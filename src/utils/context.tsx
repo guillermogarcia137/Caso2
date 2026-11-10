@@ -1,27 +1,13 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { readStorage, writeStorage } from './storage';
 import { INITIAL_PROGRESS } from '../data/users';
-export type Role = 'Alumno' | 'Tutor' | 'Coordinador';
-interface Session {
-  role: Role;
-  email: string;
-}
-interface AppState {
-  session: Session | null;
-  login: (role: Role, email: string) => void;
-  logout: () => void;
-  progress: Record<string, number[]>;
-  complete: (course: string, lesson: number) => void;
-  enroll: (course: string) => void;
-  theme: string;
-  toggleTheme: () => void;
-  language: string;
-  toggleLanguage: () => void;
-}
-const Context = createContext<AppState | null>(null);
+import { Context, type Role } from './useApp';
+export type { Role } from './useApp';
 /** Estado compartido con persistencia tolerante a fallos. */
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [session, setSession] = useState<Session | null>(() => readStorage('session', null));
+  const [session, setSession] = useState<{ role: Role; email: string } | null>(() =>
+    readStorage('session', null),
+  );
   const [progress, setProgress] = useState(() => readStorage('progress', INITIAL_PROGRESS));
   const [theme, setTheme] = useState(() => readStorage('theme', 'dark'));
   const [language, setLanguage] = useState(() => readStorage('language', 'ES'));
@@ -68,10 +54,4 @@ export function AppProvider({ children }: { children: ReactNode }) {
       {children}
     </Context.Provider>
   );
-}
-/** Acceso tipado al estado de la aplicación. */
-export function useApp() {
-  const value = useContext(Context);
-  if (!value) throw new Error('AppProvider requerido');
-  return value;
 }

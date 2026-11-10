@@ -22,7 +22,7 @@ import {
   Bar,
 } from 'recharts';
 import { StatCard } from '../components/StatCard';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 const CONNECTED = Array.from({ length: 24 }, (_, hour) => ({
   hour: `${String(hour).padStart(2, '0')}:00`,
   users: Math.round(

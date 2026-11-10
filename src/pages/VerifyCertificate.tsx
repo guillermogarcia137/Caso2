@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, XCircle, ArrowLeft } from 'lucide-react';
 import { Brand } from '../components/Layout';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 import { readStorage } from '../utils/storage';
 import { verifyCertificate, type Certificate } from '../utils/crypto';
 /** Página pública para verificar IDs locales o el JSON contenido en un QR. */

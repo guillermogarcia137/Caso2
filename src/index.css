@@ -1751,7 +1751,8 @@ video {
   padding: 6px;
   background: white;
 }
-.qr-box svg {
+.qr-box svg,
+.qr-box canvas {
   display: block;
 }
 .certificate-actions {
@@ -2798,7 +2799,8 @@ video {
   .certificate-paper h4 {
     font-size: 13px;
   }
-  .qr-box svg {
+  .qr-box svg,
+  .qr-box canvas {
     width: 72px;
     height: 72px;
   }

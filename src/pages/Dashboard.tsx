@@ -11,7 +11,7 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import { COURSES } from '../data/courses';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 import { CourseCard } from '../components/CourseCard';
 import { StatCard } from '../components/StatCard';
 import { readStorage } from '../utils/storage';

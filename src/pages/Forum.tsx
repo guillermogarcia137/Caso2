@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { THREADS, type Thread } from '../data/forum';
 import { COURSES } from '../data/courses';
 import { readStorage, writeStorage } from '../utils/storage';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 /** Comunidad por curso con hilos y respuestas persistentes. */
 export default function Forum() {
   const { session } = useApp();

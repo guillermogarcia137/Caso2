@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Code2, GitFork, Check } from 'lucide-react';
 import { Brand, REPOSITORY_URL } from '../components/Layout';
-import { useApp, type Role } from '../utils/context';
+import { useApp, type Role } from '../utils/useApp';
 /** Registro y acceso de demostración; las contraseñas nunca se almacenan. */
 export default function Login() {
   const { session, login, theme, toggleTheme } = useApp();

@@ -19,7 +19,7 @@ import {
   Terminal,
 } from 'lucide-react';
 import { useState } from 'react';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 export const REPOSITORY_URL = 'https://github.com/guillermogarcia137/Caso2';
 /** Marca consistente en la navegación y las páginas públicas. */
 export function Brand() {

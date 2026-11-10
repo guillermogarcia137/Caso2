@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { readStorage, writeStorage } from '../utils/storage';
 /** Reproductor HTML5 con posición persistente y controles de aprendizaje. */
 export function VideoPlayer({ lessonKey }: { lessonKey: string }) {
@@ -8,6 +8,37 @@ export function VideoPlayer({ lessonKey }: { lessonKey: string }) {
   const [quality, setQuality] = useState('720p');
   const [subtitles, setSubtitles] = useState(false);
   const [error, setError] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    let restored = false;
+    /** Restaura al disponer de datos, incluso cuando el navegador usa su caché. */
+    const restore = () => {
+      if (restored || video.readyState < 2) return;
+      restored = true;
+      const position = readStorage(`video:${lessonKey}`, 0);
+      video.currentTime = Math.min(position, Math.max(0, video.duration - 0.1));
+      lastSaved.current = position;
+    };
+    const save = () => {
+      if (!restored) return;
+      const time = video.currentTime;
+      if (Math.abs(time - lastSaved.current) > 1) {
+        writeStorage(`video:${lessonKey}`, time);
+        lastSaved.current = time;
+      }
+    };
+    video.addEventListener('loadeddata', restore);
+    video.addEventListener('canplay', restore);
+    video.addEventListener('timeupdate', save);
+    restore();
+    return () => {
+      if (restored) writeStorage(`video:${lessonKey}`, video.currentTime);
+      video.removeEventListener('loadeddata', restore);
+      video.removeEventListener('canplay', restore);
+      video.removeEventListener('timeupdate', save);
+    };
+  }, [lessonKey]);
   return (
     <div className="video-component">
       <video
@@ -17,24 +48,14 @@ export function VideoPlayer({ lessonKey }: { lessonKey: string }) {
         playsInline
         preload="metadata"
         crossOrigin="anonymous"
+        onLoadedMetadata={() => {
+          if (!videoRef.current) return;
+          videoRef.current.playbackRate = Number(speed);
+          if (videoRef.current.textTracks[0])
+            videoRef.current.textTracks[0].mode = subtitles ? 'showing' : 'hidden';
+        }}
         onLoadStart={() => setError(false)}
         onError={() => setError(true)}
-        onLoadedMetadata={() => {
-          if (videoRef.current) {
-            videoRef.current.currentTime = readStorage(`video:${lessonKey}`, 0);
-            videoRef.current.playbackRate = Number(speed);
-            if (videoRef.current.textTracks[0])
-              videoRef.current.textTracks[0].mode = subtitles ? 'showing' : 'hidden';
-          }
-        }}
-        onTimeUpdate={() => {
-          const time = videoRef.current?.currentTime ?? 0;
-          if (Math.abs(time - lastSaved.current) > 2) {
-            writeStorage(`video:${lessonKey}`, time);
-            lastSaved.current = time;
-          }
-        }}
-        onPause={() => writeStorage(`video:${lessonKey}`, videoRef.current?.currentTime ?? 0)}
       >
         <source src={`${import.meta.env.BASE_URL}sample-nasa.mp4`} type="video/mp4" />
         <track

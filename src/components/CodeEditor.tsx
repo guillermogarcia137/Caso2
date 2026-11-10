@@ -2,7 +2,7 @@ import Editor, { loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor/editor/editor.api.js';
 import 'monaco-editor/languages/definitions/javascript/register.js';
 import EditorWorker from 'monaco-editor/editor/editor.worker.js?worker';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 self.MonacoEnvironment = { getWorker: () => new EditorWorker() };
 loader.config({ monaco });
 /** Editor Monaco servido desde el propio sitio, con resaltado de JavaScript. */

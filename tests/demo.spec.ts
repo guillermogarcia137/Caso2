@@ -153,3 +153,26 @@ test('Coordinación: permisos y simulación de 30 segundos', async ({ page }) =>
   await expect(page.locator('.stat-card').first()).toContainText('15.000');
   await page.screenshot({ path: 'test-results/screenshots/coordinacion.png', fullPage: true });
 });
+
+/** Evita perder la posición cuando el vídeo se carga desde la caché. */
+test('Vídeo: posición recuperada, velocidad y subtítulos', async ({ page }) => {
+  await openSession(page);
+  await page.goto('./#/aula/java');
+  await page.waitForFunction(() => (document.querySelector('video')?.readyState ?? 0) >= 2);
+  await page.getByLabel('Velocidad').selectOption('1.5');
+  await expect.poll(() => page.locator('video').evaluate((video) => video.playbackRate)).toBe(1.5);
+  await page.getByRole('button', { name: 'CC · Subtítulos no' }).click();
+  await expect
+    .poll(() => page.locator('video').evaluate((video) => video.textTracks[0].mode))
+    .toBe('showing');
+  await page.locator('video').evaluate((video) => {
+    video.currentTime = 12;
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem('skilltech:video:java:0') ?? '0')),
+    )
+    .toBe(12);
+  await page.reload();
+  await expect.poll(() => page.locator('video').evaluate((video) => video.currentTime)).toBe(12);
+});

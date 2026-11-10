@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { COURSES } from '../data/courses';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 /** Aula con lecciones, progreso persistente y acceso a ambas evaluaciones. */
 export default function Classroom() {
   const { id } = useParams();

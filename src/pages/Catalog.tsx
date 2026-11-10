@@ -3,7 +3,7 @@ import { Search, X, ShieldCheck, CheckCircle2, ArrowRight, SlidersHorizontal } f
 import { Link } from 'react-router-dom';
 import { COURSES, type Course } from '../data/courses';
 import { CourseCard } from '../components/CourseCard';
-import { useApp } from '../utils/context';
+import { useApp } from '../utils/useApp';
 /** Catálogo con búsqueda, filtros combinables y matriculación en tres pasos. */
 export default function Catalog() {
   const { enroll, progress } = useApp();

@@ -1,9 +1,10 @@
-import { QRCodeSVG } from 'qrcode.react';
+import { useRef } from 'react';
+import { QRCodeCanvas } from 'qrcode.react';
 import { jsPDF } from 'jspdf';
 import { Download, GraduationCap, ShieldCheck } from 'lucide-react';
 import type { Certificate } from '../utils/crypto';
 /** Descarga un documento PDF vectorial con datos y huella de integridad. */
-function downloadCertificate(certificate: Certificate) {
+function downloadCertificate(certificate: Certificate, qrImage?: string) {
   const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
   pdf.setFillColor('#0B1020');
   pdf.rect(0, 0, 297, 210, 'F');
@@ -34,10 +35,12 @@ function downloadCertificate(certificate: Certificate) {
   pdf.text('Prototipo académico. Validación por ID en el mismo navegador.', 148.5, 184, {
     align: 'center',
   });
+  if (qrImage) pdf.addImage(qrImage, 'PNG', 247, 153, 28, 28);
   pdf.save(`SkillTech-${certificate.id}.pdf`);
 }
 /** Certificado visual con QR portable y exportación PDF. */
 export function CertificateCard({ certificate }: { certificate: Certificate }) {
+  const qrRef = useRef<HTMLCanvasElement>(null);
   return (
     <article className="certificate-card">
       <div className="certificate-paper">
@@ -60,7 +63,7 @@ export function CertificateCard({ certificate }: { certificate: Certificate }) {
             <small>{certificate.id}</small>
           </div>
           <div className="qr-box">
-            <QRCodeSVG value={JSON.stringify(certificate)} size={96} level="L" />
+            <QRCodeCanvas ref={qrRef} value={JSON.stringify(certificate)} size={96} level="L" />
           </div>
         </div>
       </div>
@@ -70,7 +73,10 @@ export function CertificateCard({ certificate }: { certificate: Certificate }) {
           <code>{certificate.hash}</code>
           <small>Prueba de integridad local; no autentica a un emisor.</small>
         </div>
-        <button className="button small" onClick={() => downloadCertificate(certificate)}>
+        <button
+          className="button small"
+          onClick={() => downloadCertificate(certificate, qrRef.current?.toDataURL('image/png'))}
+        >
           <Download size={15} /> Descargar PDF
         </button>
       </div>
