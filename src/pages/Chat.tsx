@@ -22,6 +22,7 @@ export default function Chat() {
   useEffect(() => {
     bottom.current?.scrollIntoView({ block: 'nearest' });
   }, [messages, typing]);
+  /** Conserva el mensaje y programa una respuesta simulada del tutor. */
   const send = (e: FormEvent) => {
     e.preventDefault();
     if (!text.trim() || typing) return;

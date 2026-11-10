@@ -21,6 +21,7 @@ export default function Forum() {
     writeStorage('threads', next);
   };
   const active = threads.find((t) => t.id === selected);
+  /** Publica una pregunta local asociada a un curso. */
   const add = (e: FormEvent) => {
     e.preventDefault();
     const thread = {

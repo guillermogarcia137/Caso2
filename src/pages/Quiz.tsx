@@ -43,6 +43,7 @@ export default function Quiz() {
   const questions = attempt.ids.map((qid) => QUESTIONS.find((q) => q.id === qid)!);
   const grade = questions.filter((q) => attempt.answers[q.id] === q.correct).length;
   useEffect(() => {
+    writeStorage(`quiz:${id}`, latest.current);
     const timer = window.setInterval(() => {
       const left = Math.max(0, Math.ceil((latest.current.deadline - Date.now()) / 1000));
       setSeconds(left);
@@ -62,6 +63,7 @@ export default function Quiz() {
       writeStorage(`quiz:${id}`, latest.current);
     };
   }, [id]);
+  /** Cierra el intento y persiste las respuestas para mostrar la corrección. */
   const finish = () => {
     const next = { ...attempt, finished: true };
     setAttempt(next);

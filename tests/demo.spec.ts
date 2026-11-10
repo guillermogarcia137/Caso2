@@ -64,6 +64,14 @@ test('Código: cinco casos, error sintáctico y límite de tiempo', async ({ pag
 test('Examen: autoguardado, corrección, certificado, PDF y modificación', async ({ page }) => {
   await openSession(page);
   await page.goto('./#/examen/java');
+  await expect(page.locator('fieldset')).toHaveCount(10);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem('skilltech:quiz:java') ?? 'null')?.ids.length,
+      ),
+    )
+    .toBe(10);
   const bank = await page.evaluate(async () => {
     const path = '/Caso2/src/data/questions.ts';
     return (await import(/* @vite-ignore */ path)).QUESTIONS as { id: number; correct: number }[];

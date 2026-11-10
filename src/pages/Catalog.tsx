@@ -18,6 +18,7 @@ export default function Catalog() {
       (category === 'Todos' || c.category === category) &&
       (level === 'Todos' || c.level === level),
   );
+  /** Confirma la matrícula local sin efectuar ningún cobro. */
   const pay = (e: FormEvent) => {
     e.preventDefault();
     if (course) enroll(course.id);

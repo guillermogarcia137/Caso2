@@ -12,6 +12,7 @@ export default function Login() {
   const [email, setEmail] = useState('guillermo@skilltech.demo');
   const [role, setRole] = useState<Role>('Alumno');
   const [code, setCode] = useState('');
+  /** Avanza la verificación o abre una sesión ficticia sin guardar credenciales. */
   const submit = (event: FormEvent) => {
     event.preventDefault();
     if (step === 1) setStep(2);

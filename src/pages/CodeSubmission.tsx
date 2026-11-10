@@ -29,6 +29,7 @@ export default function CodeSubmission() {
     },
     [],
   );
+  /** Simula la cola y ejecuta pruebas en un Worker cancelable. */
   const run = () => {
     setBusy(true);
     setResults([]);

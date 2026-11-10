@@ -23,16 +23,7 @@ import {
 } from 'recharts';
 import { StatCard } from '../components/StatCard';
 import { useApp } from '../utils/useApp';
-const CONNECTED = Array.from({ length: 24 }, (_, hour) => ({
-  hour: `${String(hour).padStart(2, '0')}:00`,
-  users: Math.round(
-    150 + Math.sin(((hour - 6) / 24) * Math.PI * 2) * 120 + (hour > 7 && hour < 23 ? 420 : 0),
-  ),
-}));
-const EXAMS = Array.from({ length: 8 }, (_, i) => ({
-  hour: `${9 + i}:00`,
-  exams: [120, 260, 480, 720, 1250, 970, 650, 340][i],
-}));
+import { CONNECTED, EXAMS } from '../data/metrics';
 /** Observabilidad simulada: convocatoria de treinta segundos sin carga de servidor real. */
 export default function AdminPanel() {
   const { session } = useApp();
