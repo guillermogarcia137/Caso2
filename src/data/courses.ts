@@ -1,0 +1,143 @@
+export interface Course {
+  id: string;
+  title: string;
+  category: string;
+  level: string;
+  hours: number;
+  price: number;
+  rating: string;
+  symbol: string;
+  color: string;
+  tutor: string;
+  lessons: string[];
+}
+export const COURSES: Course[] = [
+  {
+    id: 'java',
+    title: 'Java: de cero a tu primer proyecto',
+    category: 'Programación',
+    level: 'Inicial',
+    hours: 24,
+    price: 49,
+    rating: '4.9',
+    symbol: '{ }',
+    color: 'violet',
+    tutor: 'Lucía Martín',
+    lessons: [
+      'Bienvenido a Java',
+      'Variables y tipos de datos',
+      'Condicionales y bucles',
+      'Funciones y métodos',
+      'Tu primer proyecto',
+    ],
+  },
+  {
+    id: 'python',
+    title: 'Python para resolver problemas',
+    category: 'Programación',
+    level: 'Inicial',
+    hours: 18,
+    price: 39,
+    rating: '4.8',
+    symbol: 'Py',
+    color: 'teal',
+    tutor: 'Carlos Ruiz',
+    lessons: [
+      'Piensa como un programador',
+      'Variables y colecciones',
+      'Control de flujo',
+      'Funciones',
+      'Reto final',
+    ],
+  },
+  {
+    id: 'security',
+    title: 'Fundamentos de ciberseguridad',
+    category: 'Ciberseguridad',
+    level: 'Inicial',
+    hours: 20,
+    price: 59,
+    rating: '4.9',
+    symbol: '⌘',
+    color: 'blue',
+    tutor: 'Ana Torres',
+    lessons: [
+      'Seguridad desde el inicio',
+      'Redes seguras',
+      'Amenazas comunes',
+      'Protección de datos',
+      'Laboratorio',
+    ],
+  },
+  {
+    id: 'react',
+    title: 'Interfaces modernas con React',
+    category: 'Programación',
+    level: 'Intermedio',
+    hours: 32,
+    price: 79,
+    rating: '4.9',
+    symbol: '⚛',
+    color: 'blue',
+    tutor: 'Lucía Martín',
+    lessons: ['Tu primera interfaz', 'Componentes', 'Estado', 'Navegación', 'Proyecto final'],
+  },
+  {
+    id: 'cloud',
+    title: 'Cloud computing con AWS',
+    category: 'Cloud',
+    level: 'Intermedio',
+    hours: 28,
+    price: 89,
+    rating: '4.7',
+    symbol: '☁',
+    color: 'orange',
+    tutor: 'Carlos Ruiz',
+    lessons: ['Qué es la nube', 'Infraestructura', 'Almacenamiento', 'Escalabilidad', 'Despliegue'],
+  },
+  {
+    id: 'data',
+    title: 'Análisis de datos con Python',
+    category: 'Datos',
+    level: 'Intermedio',
+    hours: 26,
+    price: 69,
+    rating: '4.8',
+    symbol: '▥',
+    color: 'pink',
+    tutor: 'Ana Torres',
+    lessons: ['El valor de los datos', 'Pandas', 'Limpieza', 'Visualización', 'Análisis final'],
+  },
+  {
+    id: 'logic',
+    title: 'Lógica de programación',
+    category: 'Programación',
+    level: 'Inicial',
+    hours: 12,
+    price: 29,
+    rating: '4.9',
+    symbol: '</>',
+    color: 'orange',
+    tutor: 'Lucía Martín',
+    lessons: [
+      'Algoritmos cotidianos',
+      'Pseudocódigo',
+      'Decisiones',
+      'Repeticiones',
+      'Desafío lógico',
+    ],
+  },
+  {
+    id: 'devops',
+    title: 'Bootcamp DevOps y contenedores',
+    category: 'Cloud',
+    level: 'Avanzado',
+    hours: 60,
+    price: 149,
+    rating: '4.8',
+    symbol: '∞',
+    color: 'teal',
+    tutor: 'Carlos Ruiz',
+    lessons: ['Cultura DevOps', 'Docker', 'Integración continua', 'Kubernetes', 'Entrega final'],
+  },
+];
